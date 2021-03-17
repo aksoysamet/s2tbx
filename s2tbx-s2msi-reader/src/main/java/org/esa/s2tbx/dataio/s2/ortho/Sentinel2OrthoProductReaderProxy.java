@@ -8,6 +8,7 @@ import org.esa.s2tbx.dataio.s2.filepatterns.NamingConventionFactory;
 import org.esa.s2tbx.dataio.s2.filepatterns.S2NamingConventionUtils;
 import org.esa.s2tbx.dataio.s2.l1c.Sentinel2L1CProductReader;
 import org.esa.s2tbx.dataio.s2.l2a.Sentinel2L2AProductReader;
+import org.esa.s2tbx.dataio.s2.l2h.Sentinel2L2HProductReader;
 import org.esa.s2tbx.dataio.s2.l3.Sentinel2L3ProductReader;
 import org.esa.snap.core.dataio.ProductReader;
 import org.esa.snap.core.dataio.ProductReaderPlugIn;
@@ -64,14 +65,22 @@ public class Sentinel2OrthoProductReaderProxy implements ProductReader {
         if (this.reader == null) {
             File file = (File) input;
             Path inputPath = file.toPath();
+            System.out.println("filepath:"+inputPath.toString());
+
             VirtualPath sentinel2VirtualPath = S2NamingConventionUtils.transformToSentinel2VirtualPath(inputPath);
             INamingConvention namingConvention = NamingConventionFactory.createOrthoNamingConvention(sentinel2VirtualPath);
+            System.out.println("readProductNodes: "+namingConvention);
             if (namingConvention == null) {
                 throw new IOException("Invalid input");
             }
+            System.out.println(namingConvention.getProductLevel());
             S2Config.Sentinel2ProductLevel level = namingConvention.getProductLevel();
             if (level == S2Config.Sentinel2ProductLevel.L2A) {
                 this.reader = new Sentinel2L2AProductReader(this.readerPlugIn, this.epsgCode);
+            }else if (level == S2Config.Sentinel2ProductLevel.L2H) {
+                this.reader = new Sentinel2L2HProductReader(this.readerPlugIn, this.epsgCode);
+            }else if (level == S2Config.Sentinel2ProductLevel.L2F) {
+                throw new IOException("Invalid level not yet implemented");
             } else if (level == S2Config.Sentinel2ProductLevel.L1C) {
                 this.reader = new Sentinel2L1CProductReader(this.readerPlugIn, this.epsgCode);
             } else if (level == S2Config.Sentinel2ProductLevel.L3) {

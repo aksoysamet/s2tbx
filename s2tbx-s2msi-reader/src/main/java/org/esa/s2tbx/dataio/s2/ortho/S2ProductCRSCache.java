@@ -57,13 +57,18 @@ public class S2ProductCRSCache {
                 VirtualPath virtualPath = S2NamingConventionUtils.transformToSentinel2VirtualPath(path);
                 namingConvention = NamingConventionFactory.createOrthoNamingConvention(virtualPath);
             } catch (IOException e) {
+                e.printStackTrace();
                 return;
             }
+            System.out.println("S2ProductCRSCacheEntry: "+namingConvention);
             if(namingConvention != null) {
                 inputType = namingConvention.getInputType();
                 level = namingConvention.getProductLevel();
+                System.out.println("level: "+level.toString());
                 if (namingConvention.getEPSGList() != null) {
+                    System.out.println("epsgCodeList ");
                     epsgCodeList.addAll(namingConvention.getEPSGList());
+                    System.out.println(epsgCodeList.size());
                 }
             }
         }

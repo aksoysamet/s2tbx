@@ -50,21 +50,21 @@ public class S2ProductNamingUtils {
             return false;
         }
 
-        ArrayList<VirtualPath> datastripPaths = getDatastripsFromProductXml(xmlPath);
-        if (datastripPaths.isEmpty()) {
-            return false;
-        }
+        // ArrayList<VirtualPath> datastripPaths = getDatastripsFromProductXml(xmlPath);
+        // if (datastripPaths.isEmpty()) {
+        //     return false;
+        // }
 
         ArrayList<VirtualPath> tileDirs = getTilesFromProductXml(xmlPath);
         if (tileDirs.isEmpty()) {
             return false;
         }
 
-        for (VirtualPath datastripPath : datastripPaths) {
-            if (getXmlFromDir(datastripPath) == null) {
-                return false;
-            }
-        }
+        // for (VirtualPath datastripPath : datastripPaths) {
+        //     if (getXmlFromDir(datastripPath) == null) {
+        //         return false;
+        //     }
+        // }
 
         for (VirtualPath tileDir : tileDirs) {
             if (getXmlFromDir(tileDir) == null) {
@@ -283,6 +283,12 @@ public class S2ProductNamingUtils {
         if (string.contains("L2A")) {
             return S2Config.Sentinel2ProductLevel.L2A;
         }
+        if (string.contains("L2H")) {
+            return S2Config.Sentinel2ProductLevel.L2H;
+        }
+        if (string.contains("L2F")) {
+            return S2Config.Sentinel2ProductLevel.L2F;
+        }
         if (string.contains("L03")) {
             return S2Config.Sentinel2ProductLevel.L3;
         }
@@ -294,7 +300,6 @@ public class S2ProductNamingUtils {
 
     public static Set<String> getEpsgCodeList(VirtualPath xmlPath, S2Config.Sentinel2InputType inputType) {
         Set<String> epsgCodeList = new HashSet<>();
-
         if (inputType == S2Config.Sentinel2InputType.INPUT_TYPE_GRANULE_METADATA) {
             String epsg = getEpsgCodeFromGranule(xmlPath);
             if (epsg != null) {
