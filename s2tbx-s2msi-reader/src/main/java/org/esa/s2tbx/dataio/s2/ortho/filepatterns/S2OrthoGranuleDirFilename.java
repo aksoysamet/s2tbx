@@ -81,10 +81,7 @@ public class S2OrthoGranuleDirFilename extends S2GranuleDirFilename {
     }
 
     public static S2OrthoGranuleDirFilename create(String fileName) {
-        System.out.println("fileName : "+fileName);
         final Matcher matcher = PATTERN.matcher(fileName);
-        System.out.println("matches(): "+matcher.matches());
-
         if (matcher.matches()) {
             return new S2OrthoGranuleDirFilename(fileName,
                     matcher.group(1),

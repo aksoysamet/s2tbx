@@ -116,14 +116,12 @@ public class L2hMetadata extends S2OrthoMetadata {
 
         if (granuleName == null) {
             tileNames = metadataProduct.getTiles();
-            System.out.println("getTiles ");
         } else {
             String granuleId = namingConvention.findGranuleId(metadataProduct.getTiles(),granuleName);
             if(granuleId == null) {
                 throw new IOException(String.format("Unable to find %s into the available product granules", granuleName));
             }
             tileNames = Collections.singletonList(granuleId);
-            System.out.println("singletonList ");
         }
 
         //add product metadata
@@ -138,11 +136,8 @@ public class L2hMetadata extends S2OrthoMetadata {
         //Check if the tiles found in metadata exist and add them to granuleMetadataPathList
         ArrayList<VirtualPath> granuleMetadataPathList = new ArrayList<>();
         for (String tileName : tileNames) {
-            System.out.println("tileName H: "+tileName);
             VirtualPath folder = namingConvention.findGranuleFolderFromTileId(tileName);
-            System.out.println("folder:"+folder.getFullPathString());
             VirtualPath xml = namingConvention.findXmlFromTileId(tileName);
-            System.out.println("xml:"+xml.getFullPathString());
             if(folder == null || xml == null) {
                 String errorMessage = "Corrupted product: the file for the granule " + tileName + " is missing";
                 logger.log(Level.WARNING, errorMessage);

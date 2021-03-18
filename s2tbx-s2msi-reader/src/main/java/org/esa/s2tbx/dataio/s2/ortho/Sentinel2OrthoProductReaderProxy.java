@@ -65,15 +65,11 @@ public class Sentinel2OrthoProductReaderProxy implements ProductReader {
         if (this.reader == null) {
             File file = (File) input;
             Path inputPath = file.toPath();
-            System.out.println("filepath:"+inputPath.toString());
-
             VirtualPath sentinel2VirtualPath = S2NamingConventionUtils.transformToSentinel2VirtualPath(inputPath);
             INamingConvention namingConvention = NamingConventionFactory.createOrthoNamingConvention(sentinel2VirtualPath);
-            System.out.println("readProductNodes: "+namingConvention);
             if (namingConvention == null) {
                 throw new IOException("Invalid input");
             }
-            System.out.println(namingConvention.getProductLevel());
             S2Config.Sentinel2ProductLevel level = namingConvention.getProductLevel();
             if (level == S2Config.Sentinel2ProductLevel.L2A) {
                 this.reader = new Sentinel2L2AProductReader(this.readerPlugIn, this.epsgCode);

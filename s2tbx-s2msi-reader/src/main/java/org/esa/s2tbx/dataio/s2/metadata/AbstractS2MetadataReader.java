@@ -187,7 +187,6 @@ public abstract class AbstractS2MetadataReader {
             List<VirtualPath> imageDirectories = getImageDirectories(pathToImages, resolution);
             for (VirtualPath imageFilePath : imageDirectories) {
                 try {
-                    System.out.println("imageFilePath"+imageFilePath.getFullPathString());
                     if(imageFilePath.getFileName().toString().endsWith(".TIF"))
                         tileLayoutForResolution = readTileLayoutFromTIFFile(imageFilePath);
                     else
@@ -222,7 +221,6 @@ public abstract class AbstractS2MetadataReader {
     }
 
     public static TileLayout readTileLayoutFromTIFFile(VirtualPath imageFilePath) throws IOException, InterruptedException {
-        System.out.println("readTileLayoutFromTIFFile");
         TileLayout tileLayout=null;
         ImageInputStream inputStream = null;
         try {
@@ -239,7 +237,6 @@ public abstract class AbstractS2MetadataReader {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            System.out.println("reading tiff");
             GeoTiffProductReaderPlugIn geoTiffReaderPlugIn = new GeoTiffProductReaderPlugIn();
             GeoTiffProductReader geoTiffProductReader = new GeoTiffProductReader(geoTiffReaderPlugIn);
             
@@ -251,7 +248,6 @@ public abstract class AbstractS2MetadataReader {
             int numXTiles = 1;
             int numYTiles = 1;
             int numResolutions = 1;
-            System.out.println("create TileLayout..");
             tileLayout = new TileLayout(width, height, tileWidth, tileHeight, numXTiles, numYTiles, numResolutions);
         } catch (IOException e) {
             logger.warning(String.format("Unable to get tile layout",imageFilePath.getFullPathString()));

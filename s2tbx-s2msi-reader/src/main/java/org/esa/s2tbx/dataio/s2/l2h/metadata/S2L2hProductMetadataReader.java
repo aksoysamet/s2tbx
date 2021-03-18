@@ -19,8 +19,6 @@ public class S2L2hProductMetadataReader extends AbstractS2OrthoMetadataReader {
 
     public S2L2hProductMetadataReader(VirtualPath virtualPath, String epsgCode) throws IOException {
         super(virtualPath, epsgCode);
-        System.out.println("S2L2hProductMetadataReader");
-
     }
 
     @Override
@@ -42,8 +40,6 @@ public class S2L2hProductMetadataReader extends AbstractS2OrthoMetadataReader {
     protected List<VirtualPath> getImageDirectories(VirtualPath pathToImages, S2SpatialResolution spatialResolution) throws IOException {
         //TODO Jean use the band names to filter the image files because thne result list contains more files than the band names
         // and the files order may be different on each operating system or from a folder of a zip archive
-        System.out.println("getImageDirectories");
-
         List<VirtualPath> imageDirectories = new ArrayList<>();
         if (pathToImages.exists()) {
             VirtualPath[] imagePaths = pathToImages.listPaths();
@@ -56,8 +52,6 @@ public class S2L2hProductMetadataReader extends AbstractS2OrthoMetadataReader {
                 }
             }
         }
-        for (VirtualPath imagePath : imageDirectories)
-            System.out.println(imagePath.getFileName().toString());
         return imageDirectories;
     }
 }

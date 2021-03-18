@@ -86,8 +86,6 @@ public class L2hGranuleMetadataPSD13 extends GenericXmlMetadata implements IL2hG
         characteristics.setPsd(S2Metadata.getPSD(path));
         //DatatakeSensingStart is not in the metadata, but it is needed for the image templates. We read it from the file system
         VirtualPath folder = path.resolveSibling("IMG_DATA");
-        System.out.println("getTileProductOrganization 2: ");
-
         Pattern pattern = Pattern.compile(SAFECOMPACTNamingConvention.SPECTRAL_BAND_REGEX);
         characteristics.setDatatakeSensingStartTime("Unknown");
         boolean bFound = false;

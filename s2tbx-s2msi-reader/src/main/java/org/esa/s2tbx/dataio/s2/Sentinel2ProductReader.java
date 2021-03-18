@@ -76,7 +76,9 @@ public abstract class Sentinel2ProductReader extends AbstractProductReader {
         return true;
     }
 
-    protected abstract Product readProduct(String defaultProductName, boolean isGranule, S2Metadata metadataHeader, INamingConvention namingConvention, ProductSubsetDef subsetDef) throws Exception;
+    protected abstract Product readProduct(String defaultProductName, boolean isGranule, S2Metadata metadataHeader,
+            INamingConvention namingConvention, ProductSubsetDef subsetDef) throws Exception;
+
     protected abstract String getReaderCacheDir();
 
     protected abstract AbstractS2MetadataReader buildMetadataReader(VirtualPath virtualPath) throws IOException;
@@ -120,7 +122,8 @@ public abstract class Sentinel2ProductReader extends AbstractProductReader {
         }
 
         if (logger.isLoggable(Level.FINEST)) {
-            logger.log(Level.FINEST, "Successfully set up cache dir for product " + productName + " to " + this.cacheDir.toString());
+            logger.log(Level.FINEST,
+                    "Successfully set up cache dir for product " + productName + " to " + this.cacheDir.toString());
         }
     }
 
@@ -160,13 +163,15 @@ public abstract class Sentinel2ProductReader extends AbstractProductReader {
 
                 if (logger.isLoggable(Level.FINE)) {
                     double elapsedTimeInSeconds = (System.currentTimeMillis() - startTime) / 1000.d;
-                    logger.log(Level.FINE,  "Finish reading the tile layouts using the metadata file '"
+                    logger.log(Level.FINE,
+                            "Finish reading the tile layouts using the metadata file '"
                                     + inputVirtualPath.getFullPathString() + "', elapsed time: " + elapsedTimeInSeconds
                                     + " seconds.");
                 }
 
                 if (config == null) {
-                    throw new NullPointerException(  String.format("Unable to retrieve the image tile layout associated to product [%s]",
+                    throw new NullPointerException(
+                            String.format("Unable to retrieve the image tile layout associated to product [%s]",
                                     inputVirtualPath.getFileName().toString()));
                 }
 
@@ -176,7 +181,8 @@ public abstract class Sentinel2ProductReader extends AbstractProductReader {
 
                 if (logger.isLoggable(Level.FINE)) {
                     double elapsedTimeInSeconds = (System.currentTimeMillis() - startTime) / 1000.d;
-                    logger.log(Level.FINE, "Finish reading the header using the metadata file '" + inputVirtualPath.getFullPathString()
+                    logger.log(Level.FINE,
+                            "Finish reading the header using the metadata file '" + inputVirtualPath.getFullPathString()
                                     + "', elapsed time: " + elapsedTimeInSeconds + " seconds.");
                 }
 

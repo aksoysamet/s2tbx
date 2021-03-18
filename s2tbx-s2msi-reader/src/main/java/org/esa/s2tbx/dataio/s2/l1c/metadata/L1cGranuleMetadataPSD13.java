@@ -92,8 +92,6 @@ public class L1cGranuleMetadataPSD13 extends GenericXmlMetadata implements IL1cG
 
         //DatatakeSensingStart is not in the metadata, but it is needed for the image templates. We read it from the file system
         VirtualPath folder = xmlPath.resolveSibling("IMG_DATA");
-        System.out.println("getTileProductOrganization l1c ");
-
         Pattern pattern = Pattern.compile(SAFECOMPACTNamingConvention.SPECTRAL_BAND_REGEX);
         characteristics.setDatatakeSensingStartTime("Unknown");
         if (folder.existsAndHasChildren()) {
