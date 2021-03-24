@@ -58,7 +58,6 @@ import org.esa.snap.core.image.MosaicMatrix;
 import org.esa.snap.core.image.SourceImageScaler;
 import org.esa.snap.core.util.ImageUtils;
 import org.esa.snap.dataio.geotiff.GeoTiffMatrixMultiLevelSource;
-import org.esa.snap.dataio.geotiff.GeoTiffMultiLevelSource;
 import org.esa.snap.jp2.reader.internal.JP2MatrixBandMultiLevelSource;
 import org.esa.snap.lib.openjpeg.utils.StackTraceUtils;
 import org.geotools.data.simple.SimpleFeatureIterator;
@@ -933,7 +932,6 @@ public abstract class Sentinel2OrthoProductReader extends Sentinel2ProductReader
         if (anglesGrid == null) {
             return bandAnglesGrid;
         }
-
         int gridHeight = tile.getSunAnglesGrid().getZenith().length;
         int gridWidth = tile.getSunAnglesGrid().getZenith()[0].length;
         float[] sunZeniths = new float[gridWidth * gridHeight];
